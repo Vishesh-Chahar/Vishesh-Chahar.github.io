@@ -114,6 +114,9 @@
     }
 
     .blog-post {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
       position: relative;
       padding: 2rem;
       margin-bottom: 2rem;
@@ -126,6 +129,20 @@
     .blog-post:hover {
       transform: translateX(10px);
       box-shadow: var(--neon-glow);
+    }
+
+    .blog-post-image {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid var(--highlight);
+    }
+
+    .blog-post-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .blog-date {
@@ -184,6 +201,15 @@
       .container {
         padding: 1rem;
       }
+
+      .blog-post {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-post-image {
+        width: 100%;
+        height: 200px;
+      }
     }
   </style>
 </head>
@@ -201,7 +227,7 @@
 
   <div class="container">
     <section class="intro">
-      <img src="pfp.jpg" alt="Vishesh Chahar" class="profile-img">
+      <img src="pfp2.jpg" alt="Vishesh Chahar" class="profile-img">
       <h1>Vishesh Chahar</h1>
       <p>Data Scientist | AI/ML Engineer | NLP Specialist</p>
     </section>
@@ -294,22 +320,44 @@
                 const postElement = document.createElement('div');
                 postElement.className = 'blog-post';
                 postElement.innerHTML = `
-                    <div class="blog-date">${post.date}</div>
-                    <h3>${post.title}</h3>
-                    <p>${post.excerpt}</p>
-                    <a href="${post.url}" target="_blank">${post.url.includes('http') ? 'Try the Demo →' : 'Read More →'}</a>
+                    <img 
+                        src="${post.image}" 
+                        alt="${post.title}"
+                        class="blog-post-image"
+                        onerror="this.src='./blog/images/default-blog.png'"
+                    >
+                    <div class="blog-post-content">
+                        <div>
+                            <div class="blog-date">${post.date}</div>
+                            <h3>${post.title}</h3>
+                            <p>${post.excerpt}</p>
+                        </div>
+                        <a href="${post.url}" target="_blank">
+                            ${post.url.includes('http') ? 'Try the Demo →' : 'Read More →'}
+                        </a>
+                    </div>
                 `;
                 container.appendChild(postElement);
             });
         } catch (error) {
             console.error('Error loading blog posts:', error);
-            // Fallback content if JSON fails to load
+            // Fallback content with image
             document.getElementById('blog-posts-container').innerHTML = `
                 <div class="blog-post">
-                    <div class="blog-date">2024-01-15</div>
-                    <h3>Understanding Neural Network Weights Through Visualization</h3>
-                    <p>Struggling with understanding how weights work in neural networks? I've created a Streamlit app that visualizes neural network weights as layers of valves, helping you understand how weight adjustments affect the network's output.</p>
-                    <a href="https://lnkd.in/gBG9dyS2" target="_blank">Try the Demo →</a>
+                    <img 
+                        src="./blog/images/neural-network-viz.png" 
+                        alt="Neural Network Visualization"
+                        class="blog-post-image"
+                        onerror="this.src='./blog/images/default-blog.png'"
+                    >
+                    <div class="blog-post-content">
+                        <div>
+                            <div class="blog-date">2024-01-15</div>
+                            <h3>Understanding Neural Network Weights Through Visualization</h3>
+                            <p>Struggling with understanding how weights work in neural networks? I've created a Streamlit app that visualizes neural network weights as layers of valves, helping you understand how weight adjustments affect the network's output.</p>
+                        </div>
+                        <a href="https://lnkd.in/gBG9dyS2" target="_blank">Try the Demo →</a>
+                    </div>
                 </div>
             `;
         }
