@@ -1,12 +1,12 @@
 {
     "images": [
         {
-            "src": "../neural-network-visualization/images/img1.png",
+            "src": "img1.png",
             "alt": "Neural Network Visualization Demo",
             "caption": "Interactive visualization of neural network weights"
         },
         {
-            "src": "../neural-network-visualization/images/img2.png",
+            "src": "img2.png",
             "alt": "Network Architecture",
             "caption": "The architecture diagram of the neural network"
         }
