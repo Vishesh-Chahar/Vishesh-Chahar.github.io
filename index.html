@@ -384,29 +384,23 @@
 
             for (const post of data.posts) {
                 try {
-                    // Load metadata for each post
                     const metadataResponse = await fetch(`${post.folder}/metadata.json`);
                     const metadata = await metadataResponse.json();
 
                     const postElement = document.createElement('div');
                     postElement.className = 'blog-post';
                     
-                    // Create image carousel/gallery with corrected image paths
-                    const imagesHTML = metadata.images.map((image, index) => {
-                        // Remove the leading dot from the image src if it exists
-                        const imagePath = `${post.folder}/${image.src.replace(/^\.\//, '')}`;
-                        return `
-                            <div class="blog-image-container ${index === 0 ? 'active' : ''}">
-                                <img 
-                                    src="${imagePath}" 
-                                    alt="${image.alt}"
-                                    class="blog-post-image"
-                                    onerror="this.src='./blog/images/default-blog.png'"
-                                >
-                                <p class="image-caption">${image.caption}</p>
-                            </div>
-                        `;
-                    }).join('');
+                    const imagesHTML = metadata.images.map((image, index) => `
+                        <div class="blog-image-container ${index === 0 ? 'active' : ''}">
+                            <img 
+                                src="${image.src}" 
+                                alt="${image.alt}"
+                                class="blog-post-image"
+                                onerror="this.src='./blog/images/default-blog.png'"
+                            >
+                            <p class="image-caption">${image.caption}</p>
+                        </div>
+                    `).join('');
 
                     postElement.innerHTML = `
                         <div class="blog-images-carousel">
