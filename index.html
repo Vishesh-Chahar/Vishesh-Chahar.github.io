@@ -4,15 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name - Portfolio</title>
+  <title>Vishesh Chahar - Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Consolas&display=swap" rel="stylesheet">
   <style>
     :root {
-      --cream: #FAF3E0;
-      --light-brown: #EAD7C7;
-      --dark-brown: #6B4F4F;
-      --text-color: #463434;
-      --hover-color: #8B7355;
+      --cream: #F5E6D3;
+      --light-brown: #D2B48C;
+      --dark-brown: #2C1810;
+      --text-color: #1A1A1A;
+      --hover-color: #8B4513;
+      --card-bg: #EDE0D4;
     }
 
     * {
@@ -29,7 +30,7 @@
     }
 
     nav {
-      background-color: var(--light-brown);
+      background-color: var(--dark-brown);
       padding: 1rem;
       position: fixed;
       width: 100%;
@@ -46,13 +47,13 @@
 
     nav a {
       text-decoration: none;
-      color: var(--text-color);
+      color: var(--cream);
       font-weight: bold;
       transition: color 0.3s ease;
     }
 
     nav a:hover {
-      color: var(--hover-color);
+      color: var(--light-brown);
     }
 
     .container {
@@ -64,9 +65,9 @@
     section {
       margin-bottom: 3rem;
       padding: 2rem;
-      background-color: white;
+      background-color: var(--card-bg);
       border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16);
     }
 
     h1, h2 {
@@ -95,8 +96,9 @@
 
     .project-card {
       background: var(--light-brown);
-      padding: 1rem;
-      border-radius: 4px;
+      padding: 1.5rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       transition: transform 0.3s ease;
     }
 
@@ -133,6 +135,20 @@
       margin-top: 3rem;
     }
 
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .skill-tag {
+      background: var(--light-brown);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
     @media (max-width: 768px) {
       nav ul {
         flex-direction: column;
@@ -154,42 +170,52 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#blog">Blog</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="resume.pdf" target="_blank">Resume</a></li>
+      <li><a href="Resume_Vishesh_Chahar (5).pdf" target="_blank">Resume</a></li>
     </ul>
   </nav>
 
   <div class="container">
     <section class="intro">
-      <img src="your-profile-picture.jpg" alt="Your Name" class="profile-img">
-      <h1>Your Name</h1>
-      <p>Software Developer | AI Enthusiast | Problem Solver</p>
+      <img src="your-profile-picture.jpg" alt="Vishesh Chahar" class="profile-img">
+      <h1>Vishesh Chahar</h1>
+      <p>Data Scientist | AI/ML Engineer | NLP Specialist</p>
     </section>
 
     <section id="about">
       <h2>About Me</h2>
       <p>
-        I'm a passionate software developer with expertise in AI/ML and web development. 
-        Currently focusing on building scalable solutions and exploring new technologies.
+        I'm a Data Scientist specializing in AI/ML, NLP, and LLM fine-tuning. With expertise in scalable architectures, 
+        CUDA-based model acceleration, and data pipeline optimization, I focus on delivering efficient AI solutions.
       </p>
+      <div class="skills-list">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">CUDA</span>
+        <span class="skill-tag">PyTorch</span>
+        <span class="skill-tag">Kafka</span>
+        <span class="skill-tag">PySpark</span>
+        <span class="skill-tag">Flask</span>
+        <span class="skill-tag">ML Pipelines</span>
+        <span class="skill-tag">LLM Fine-tuning</span>
+      </div>
     </section>
 
     <section id="projects">
       <h2>Projects</h2>
       <div class="project-grid">
         <div class="project-card">
-          <h3>Project 1</h3>
-          <p>A brief description of your first project</p>
-          <a href="https://github.com/yourusername/project1">View Project →</a>
+          <h3>Headliner</h3>
+          <p>Fine-tuned FLAN-T5 model for automated headline generation, implementing advanced NLP techniques for improved content summarization.</p>
+          <a href="https://github.com/Vishesh-Chahar/headliner">View Project →</a>
         </div>
         <div class="project-card">
-          <h3>Project 2</h3>
-          <p>A brief description of your second project</p>
-          <a href="https://github.com/yourusername/project2">View Project →</a>
+          <h3>QA Project</h3>
+          <p>Developed a custom NLP model for automated question answering, enhancing information retrieval accuracy.</p>
+          <a href="https://github.com/Vishesh-Chahar/QA">View Project →</a>
         </div>
         <div class="project-card">
-          <h3>Project 3</h3>
-          <p>A brief description of your third project</p>
-          <a href="https://github.com/yourusername/project3">View Project →</a>
+          <h3>Diagnosis Pal</h3>
+          <p>Created an AI-powered disease classification model using advanced machine learning algorithms for medical diagnosis assistance.</p>
+          <a href="https://github.com/Vishesh-Chahar/Diagnostic-Pal">View Project →</a>
         </div>
       </div>
     </section>
@@ -197,13 +223,13 @@
     <section id="blog">
       <h2>Blog Posts</h2>
       <div class="blog-post">
-        <h3>Latest Post Title</h3>
-        <p>Brief excerpt from your latest blog post...</p>
+        <h3>Optimizing LLM Training Pipelines</h3>
+        <p>Insights into building efficient training pipelines for large language models...</p>
         <a href="#">Read More →</a>
       </div>
       <div class="blog-post">
-        <h3>Another Post Title</h3>
-        <p>Brief excerpt from another blog post...</p>
+        <h3>CUDA Acceleration Techniques</h3>
+        <p>Deep dive into CUDA optimization strategies for ML model training...</p>
         <a href="#">Read More →</a>
       </div>
     </section>
@@ -211,16 +237,16 @@
     <section id="contact">
       <h2>Get in Touch</h2>
       <div class="contact-links">
-        <a href="mailto:your.email@example.com">Email</a>
-        <a href="https://github.com/yourusername">GitHub</a>
-        <a href="https://linkedin.com/in/yourusername">LinkedIn</a>
-        <a href="https://twitter.com/yourusername">Twitter</a>
+        <a href="mailto:vishesh.chahar01@gmail.com">Email</a>
+        <a href="https://github.com/Vishesh-Chahar">GitHub</a>
+        <a href="https://linkedin.com/in/visheshchahar">LinkedIn</a>
+        <a href="https://leetcode.com/vishesh_chahar/">LeetCode</a>
       </div>
     </section>
   </div>
 
   <footer>
-    <p>&copy; 2024 Your Name. All rights reserved.</p>
+    <p>&copy; 2024 Vishesh Chahar. All rights reserved.</p>
   </footer>
 </body>
 
