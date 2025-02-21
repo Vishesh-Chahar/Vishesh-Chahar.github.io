@@ -8,15 +8,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Consolas&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Modern Cyberpunk-inspired theme */
-      --bg-primary: #1A1A2E;
-      --bg-secondary: #16213E;
-      --text-primary: #E94560;
-      --text-secondary: #0F3460;
-      --accent: #E94560;
-      --highlight: #533483;
-      --card-bg: #16213E;
-      --neon-glow: 0 0 10px var(--accent);
+      /* Color palette from https://colorhunt.co/palette/1e201e3c3d37697565ecdfcc */
+      --bg-primary: #1E201E;      /* Dark charcoal */
+      --bg-secondary: #3C3D37;    /* Dark olive */
+      --accent: #697565;          /* Sage green */
+      --text-primary: #ECDFCC;    /* Cream */
+      --text-secondary: #ECDFCC99; /* Cream with opacity */
+      --highlight: #697565;       /* Sage green */
+      --card-bg: #3C3D37;         /* Dark olive */
+      --neon-glow: 0 0 10px #ECDFCC; /* Cream glow */
     }
 
     * {
@@ -33,7 +33,7 @@
     }
 
     nav {
-      background-color: rgba(10, 25, 47, 0.85);
+      background-color: rgba(30, 32, 30, 0.85); /* --bg-primary with opacity */
       backdrop-filter: blur(10px);
       padding: 1rem;
       position: fixed;
@@ -110,7 +110,7 @@
     .project-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--neon-glow);
-      border-color: var(--accent);
+      border-color: var(--text-primary);
     }
 
     .blog-post {
@@ -158,13 +158,13 @@
     }
 
     a {
-      color: var(--accent);
+      color: var(--text-primary);
       text-decoration: none;
       transition: color 0.3s ease;
     }
 
     a:hover {
-      color: var(--text-primary);
+      color: var(--accent);
     }
 
     footer {
@@ -183,8 +183,8 @@
     }
 
     .skill-tag {
-      background: var(--highlight);
-      color: var(--accent);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
       border: 1px solid var(--accent);
       padding: 0.5rem 1rem;
       border-radius: 20px;
@@ -235,8 +235,8 @@
         top: 50%;
         transform: translateY(-50%);
         background: var(--bg-secondary);
-        border: 1px solid var(--accent);
-        color: var(--accent);
+        border: 1px solid var(--text-primary);
+        color: var(--text-primary);
         padding: 8px 12px;
         cursor: pointer;
         z-index: 2;
@@ -259,12 +259,12 @@
         height: 8px;
         border-radius: 50%;
         background: var(--bg-secondary);
-        border: 1px solid var(--accent);
+        border: 1px solid var(--text-primary);
         cursor: pointer;
     }
 
     .dot.active {
-        background: var(--accent);
+        background: var(--text-primary);
     }
 
     .image-caption {
@@ -393,7 +393,7 @@
                     const imagesHTML = metadata.images.map((image, index) => `
                         <div class="blog-image-container ${index === 0 ? 'active' : ''}">
                             <img 
-                                src="blog/posts/${image.src}" 
+                                src="blog/posts/${post.folder}/images/${image.src}" 
                                 alt="${image.alt}"
                                 class="blog-post-image"
                                 onerror="this.src='blog/images/default-blog.png'"
