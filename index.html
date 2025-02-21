@@ -8,12 +8,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Consolas&display=swap" rel="stylesheet">
   <style>
     :root {
-      --cream: #F5E6D3;
-      --light-brown: #D2B48C;
-      --dark-brown: #2C1810;
-      --text-color: #1A1A1A;
-      --hover-color: #8B4513;
-      --card-bg: #EDE0D4;
+      --bg-primary: #0A192F;
+      --bg-secondary: #112240;
+      --text-primary: #CCD6F6;
+      --text-secondary: #8892B0;
+      --accent: #64FFDA;
+      --highlight: #233554;
+      --card-bg: #112240;
     }
 
     * {
@@ -24,13 +25,14 @@
 
     body {
       font-family: 'Consolas', monospace;
-      background-color: var(--cream);
-      color: var(--text-color);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
       line-height: 1.6;
     }
 
     nav {
-      background-color: var(--dark-brown);
+      background-color: rgba(10, 25, 47, 0.85);
+      backdrop-filter: blur(10px);
       padding: 1rem;
       position: fixed;
       width: 100%;
@@ -47,13 +49,13 @@
 
     nav a {
       text-decoration: none;
-      color: var(--cream);
+      color: var(--text-primary);
       font-weight: bold;
       transition: color 0.3s ease;
     }
 
     nav a:hover {
-      color: var(--light-brown);
+      color: var(--accent);
     }
 
     .container {
@@ -65,13 +67,14 @@
     section {
       margin-bottom: 3rem;
       padding: 2rem;
-      background-color: var(--card-bg);
+      background-color: var(--bg-secondary);
       border-radius: 8px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--highlight);
     }
 
-    h1, h2 {
-      color: var(--dark-brown);
+    h1, h2, h3 {
+      color: var(--text-primary);
       margin-bottom: 1rem;
     }
 
@@ -85,7 +88,7 @@
       height: 150px;
       border-radius: 50%;
       margin-bottom: 1rem;
-      border: 3px solid var(--light-brown);
+      border: 3px solid var(--highlight);
     }
 
     .project-grid {
@@ -95,21 +98,23 @@
     }
 
     .project-card {
-      background: var(--light-brown);
+      background: var(--card-bg);
+      border: 1px solid var(--highlight);
       padding: 1.5rem;
       border-radius: 6px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .project-card:hover {
       transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(100, 255, 218, 0.1);
+      border-color: var(--accent);
     }
 
     .blog-post {
       margin-bottom: 1.5rem;
       padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--light-brown);
+      border-bottom: 1px solid var(--highlight);
     }
 
     .contact-links {
@@ -119,19 +124,20 @@
     }
 
     a {
-      color: var(--dark-brown);
+      color: var(--accent);
       text-decoration: none;
       transition: color 0.3s ease;
     }
 
     a:hover {
-      color: var(--hover-color);
+      color: var(--text-primary);
     }
 
     footer {
       text-align: center;
       padding: 2rem;
-      background-color: var(--light-brown);
+      background-color: var(--bg-secondary);
+      color: var(--text-secondary);
       margin-top: 3rem;
     }
 
@@ -143,7 +149,9 @@
     }
 
     .skill-tag {
-      background: var(--light-brown);
+      background: var(--highlight);
+      color: var(--accent);
+      border: 1px solid var(--accent);
       padding: 0.5rem 1rem;
       border-radius: 20px;
       font-size: 0.9rem;
@@ -216,6 +224,21 @@
           <h3>Diagnosis Pal</h3>
           <p>Created an AI-powered disease classification model using advanced machine learning algorithms for medical diagnosis assistance.</p>
           <a href="https://github.com/Vishesh-Chahar/Diagnostic-Pal">View Project →</a>
+        </div>
+        <div class="project-card">
+          <h3>Team Fateh</h3>
+          <p>Award-winning engineering project focused on innovative solutions and technical excellence.</p>
+          <a href="https://www.teamfateh.com">View Project →</a>
+        </div>
+        <div class="project-card">
+          <h3>Sentiment Analysis</h3>
+          <p>Built a sentiment analysis model using BERT for accurate emotion detection in text.</p>
+          <a href="https://github.com/Vishesh-Chahar/Sentiment-Analysis">View Project →</a>
+        </div>
+        <div class="project-card">
+          <h3>ML Algorithms</h3>
+          <p>Implementation of various machine learning algorithms from scratch for educational purposes.</p>
+          <a href="https://github.com/Vishesh-Chahar/ML-Algorithms">View Project →</a>
         </div>
       </div>
     </section>
