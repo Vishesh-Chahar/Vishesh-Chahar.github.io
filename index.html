@@ -8,13 +8,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Consolas&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #0A192F;
-      --bg-secondary: #112240;
-      --text-primary: #CCD6F6;
-      --text-secondary: #8892B0;
-      --accent: #64FFDA;
-      --highlight: #233554;
-      --card-bg: #112240;
+      /* Modern Cyberpunk-inspired theme */
+      --bg-primary: #1A1A2E;
+      --bg-secondary: #16213E;
+      --text-primary: #E94560;
+      --text-secondary: #0F3460;
+      --accent: #E94560;
+      --highlight: #533483;
+      --card-bg: #16213E;
+      --neon-glow: 0 0 10px var(--accent);
     }
 
     * {
@@ -102,19 +104,34 @@
       border: 1px solid var(--highlight);
       padding: 1.5rem;
       border-radius: 6px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .project-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(100, 255, 218, 0.1);
+      box-shadow: var(--neon-glow);
       border-color: var(--accent);
     }
 
     .blog-post {
-      margin-bottom: 1.5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--highlight);
+      position: relative;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      border-left: 4px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .blog-post:hover {
+      transform: translateX(10px);
+      box-shadow: var(--neon-glow);
+    }
+
+    .blog-date {
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
     }
 
     .contact-links {
@@ -245,22 +262,8 @@
 
     <section id="blog">
       <h2>Blog Posts</h2>
-      <div class="blog-post">
-        <h3>Understanding Neural Network Weights Through Visualization</h3>
-        <p>
-          Struggling with understanding how weights work in neural networks? I've created a Streamlit app that visualizes neural network weights as layers of valves, helping you understand how weight adjustments affect the network's output. Perfect for those who understand the theory but want to "feel" how neural networks actually work.
-        </p>
-        <a href="https://lnkd.in/gBG9dyS2" target="_blank">Try the Interactive Demo →</a>
-      </div>
-      <div class="blog-post">
-        <h3>Optimizing LLM Training Pipelines</h3>
-        <p>Insights into building efficient training pipelines for large language models...</p>
-        <a href="#">Read More →</a>
-      </div>
-      <div class="blog-post">
-        <h3>CUDA Acceleration Techniques</h3>
-        <p>Deep dive into CUDA optimization strategies for ML model training...</p>
-        <a href="#">Read More →</a>
+      <div id="blog-posts-container">
+        <!-- Blog posts will be loaded here dynamically -->
       </div>
     </section>
 
@@ -278,6 +281,34 @@
   <footer>
     <p>&copy; 2024 Vishesh Chahar. All rights reserved.</p>
   </footer>
+
+  <script>
+    // Function to load and display blog posts
+    async function loadBlogPosts() {
+      try {
+        const response = await fetch('/blog/posts/index.json');
+        const posts = await response.json();
+        const container = document.getElementById('blog-posts-container');
+
+        posts.forEach(post => {
+          const postElement = document.createElement('div');
+          postElement.className = 'blog-post';
+          postElement.innerHTML = `
+            <div class="blog-date">${post.date}</div>
+            <h3>${post.title}</h3>
+            <p>${post.excerpt}</p>
+            <a href="/blog/posts/${post.slug}" target="_blank">Read More →</a>
+          `;
+          container.appendChild(postElement);
+        });
+      } catch (error) {
+        console.error('Error loading blog posts:', error);
+      }
+    }
+
+    // Load blog posts when the page loads
+    document.addEventListener('DOMContentLoaded', loadBlogPosts);
+  </script>
 </body>
 
 </html>

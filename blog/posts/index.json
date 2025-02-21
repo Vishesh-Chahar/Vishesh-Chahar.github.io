@@ -1,0 +1,18 @@
+{
+    "posts": [
+        {
+            "title": "Understanding Neural Network Weights Through Visualization",
+            "slug": "neural-network-visualization",
+            "date": "2024-01-15",
+            "excerpt": "Struggling with understanding how weights work in neural networks? I've created a Streamlit app that visualizes neural network weights as layers of valves...",
+            "url": "https://lnkd.in/gBG9dyS2"
+        },
+        {
+            "title": "Optimizing LLM Training Pipelines",
+            "slug": "llm-training-pipelines",
+            "date": "2024-01-10",
+            "excerpt": "Insights into building efficient training pipelines for large language models...",
+            "url": "/blog/posts/llm-training-pipelines.md"
+        }
+    ]
+} 
