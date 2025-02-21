@@ -285,25 +285,34 @@
   <script>
     // Function to load and display blog posts
     async function loadBlogPosts() {
-      try {
-        const response = await fetch('/blog/posts/index.json');
-        const posts = await response.json();
-        const container = document.getElementById('blog-posts-container');
+        try {
+            const response = await fetch('./blog/posts/index.json');
+            const data = await response.json();
+            const container = document.getElementById('blog-posts-container');
 
-        posts.forEach(post => {
-          const postElement = document.createElement('div');
-          postElement.className = 'blog-post';
-          postElement.innerHTML = `
-            <div class="blog-date">${post.date}</div>
-            <h3>${post.title}</h3>
-            <p>${post.excerpt}</p>
-            <a href="/blog/posts/${post.slug}" target="_blank">Read More →</a>
-          `;
-          container.appendChild(postElement);
-        });
-      } catch (error) {
-        console.error('Error loading blog posts:', error);
-      }
+            data.posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'blog-post';
+                postElement.innerHTML = `
+                    <div class="blog-date">${post.date}</div>
+                    <h3>${post.title}</h3>
+                    <p>${post.excerpt}</p>
+                    <a href="${post.url}" target="_blank">${post.url.includes('http') ? 'Try the Demo →' : 'Read More →'}</a>
+                `;
+                container.appendChild(postElement);
+            });
+        } catch (error) {
+            console.error('Error loading blog posts:', error);
+            // Fallback content if JSON fails to load
+            document.getElementById('blog-posts-container').innerHTML = `
+                <div class="blog-post">
+                    <div class="blog-date">2024-01-15</div>
+                    <h3>Understanding Neural Network Weights Through Visualization</h3>
+                    <p>Struggling with understanding how weights work in neural networks? I've created a Streamlit app that visualizes neural network weights as layers of valves, helping you understand how weight adjustments affect the network's output.</p>
+                    <a href="https://lnkd.in/gBG9dyS2" target="_blank">Try the Demo →</a>
+                </div>
+            `;
+        }
     }
 
     // Load blog posts when the page loads

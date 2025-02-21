@@ -4,15 +4,15 @@
             "title": "Understanding Neural Network Weights Through Visualization",
             "slug": "neural-network-visualization",
             "date": "2024-01-15",
-            "excerpt": "Struggling with understanding how weights work in neural networks? I've created a Streamlit app that visualizes neural network weights as layers of valves...",
+            "excerpt": "Struggling with understanding how weights work in neural networks? I've created a Streamlit app that visualizes neural network weights as layers of valves, helping you understand how weight adjustments affect the network's output.",
             "url": "https://lnkd.in/gBG9dyS2"
         },
         {
             "title": "Optimizing LLM Training Pipelines",
             "slug": "llm-training-pipelines",
             "date": "2024-01-10",
-            "excerpt": "Insights into building efficient training pipelines for large language models...",
-            "url": "/blog/posts/llm-training-pipelines.md"
+            "excerpt": "Insights into building efficient training pipelines for large language models and optimizing their performance for production environments.",
+            "url": "https://github.com/Vishesh-Chahar"
         }
     ]
 } 
