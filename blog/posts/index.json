@@ -6,7 +6,23 @@
             "date": "2024-01-15",
             "excerpt": "Struggling with understanding how weights work in neural networks? I've created a Streamlit app that visualizes neural network weights as layers of valves, helping you understand how weight adjustments affect the network's output.",
             "url": "https://lnkd.in/gBG9dyS2",
-            "image": "./blog/images/neural-network-viz.png"
+            "images": [
+                {
+                    "src": "./blog/images/nn-viz-main.jpg",
+                    "alt": "Neural Network Visualization Demo",
+                    "caption": "Interactive visualization of neural network weights"
+                },
+                {
+                    "src": "./blog/images/nn-viz-architecture.jpg",
+                    "alt": "Network Architecture",
+                    "caption": "The architecture diagram of the neural network"
+                },
+                {
+                    "src": "./blog/images/nn-viz-results.jpg",
+                    "alt": "Results Visualization",
+                    "caption": "Visualization of weight adjustments"
+                }
+            ]
         },
         {
             "title": "Optimizing LLM Training Pipelines",
@@ -14,7 +30,18 @@
             "date": "2024-01-10",
             "excerpt": "Insights into building efficient training pipelines for large language models and optimizing their performance for production environments.",
             "url": "https://github.com/Vishesh-Chahar",
-            "image": "./blog/images/llm-pipeline.png"
+            "images": [
+                {
+                    "src": "./blog/images/llm-pipeline-overview.jpg",
+                    "alt": "LLM Pipeline Overview",
+                    "caption": "High-level overview of the training pipeline"
+                },
+                {
+                    "src": "./blog/images/llm-performance.jpg",
+                    "alt": "Performance Metrics",
+                    "caption": "Training performance metrics and optimization results"
+                }
+            ]
         }
     ]
 } 

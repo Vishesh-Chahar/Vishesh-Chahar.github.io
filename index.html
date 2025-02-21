@@ -211,6 +211,73 @@
         height: 200px;
       }
     }
+
+    .blog-images-carousel {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .blog-image-container {
+        display: none;
+        width: 100%;
+        height: 100%;
+    }
+
+    .blog-image-container.active {
+        display: block;
+    }
+
+    .carousel-prev,
+    .carousel-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--bg-secondary);
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        padding: 8px 12px;
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    .carousel-prev { left: 10px; }
+    .carousel-next { right: 10px; }
+
+    .carousel-dots {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--bg-secondary);
+        border: 1px solid var(--accent);
+        cursor: pointer;
+    }
+
+    .dot.active {
+        background: var(--accent);
+    }
+
+    .image-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(22, 33, 62, 0.8);
+        color: var(--text-primary);
+        padding: 8px;
+        margin: 0;
+        font-size: 0.9rem;
+    }
   </style>
 </head>
 
@@ -309,7 +376,6 @@
   </footer>
 
   <script>
-    // Function to load and display blog posts
     async function loadBlogPosts() {
         try {
             const response = await fetch('./blog/posts/index.json');
@@ -319,13 +385,33 @@
             data.posts.forEach(post => {
                 const postElement = document.createElement('div');
                 postElement.className = 'blog-post';
+                
+                // Create image carousel/gallery
+                const imagesHTML = post.images.map((image, index) => `
+                    <div class="blog-image-container ${index === 0 ? 'active' : ''}">
+                        <img 
+                            src="${image.src}" 
+                            alt="${image.alt}"
+                            class="blog-post-image"
+                            onerror="this.src='./blog/images/default-blog.png'"
+                        >
+                        <p class="image-caption">${image.caption}</p>
+                    </div>
+                `).join('');
+
                 postElement.innerHTML = `
-                    <img 
-                        src="${post.image}" 
-                        alt="${post.title}"
-                        class="blog-post-image"
-                        onerror="this.src='./blog/images/default-blog.png'"
-                    >
+                    <div class="blog-images-carousel">
+                        ${imagesHTML}
+                        ${post.images.length > 1 ? `
+                            <button class="carousel-prev">←</button>
+                            <button class="carousel-next">→</button>
+                            <div class="carousel-dots">
+                                ${post.images.map((_, i) => `
+                                    <span class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
                     <div class="blog-post-content">
                         <div>
                             <div class="blog-date">${post.date}</div>
@@ -337,29 +423,42 @@
                         </a>
                     </div>
                 `;
+
+                // Add carousel functionality if there are multiple images
+                if (post.images.length > 1) {
+                    const carousel = postElement.querySelector('.blog-images-carousel');
+                    const images = carousel.querySelectorAll('.blog-image-container');
+                    const dots = carousel.querySelectorAll('.dot');
+                    let currentIndex = 0;
+
+                    function showImage(index) {
+                        images.forEach(img => img.classList.remove('active'));
+                        dots.forEach(dot => dot.classList.remove('active'));
+                        images[index].classList.add('active');
+                        dots[index].classList.add('active');
+                        currentIndex = index;
+                    }
+
+                    carousel.querySelector('.carousel-prev').addEventListener('click', () => {
+                        const newIndex = (currentIndex - 1 + images.length) % images.length;
+                        showImage(newIndex);
+                    });
+
+                    carousel.querySelector('.carousel-next').addEventListener('click', () => {
+                        const newIndex = (currentIndex + 1) % images.length;
+                        showImage(newIndex);
+                    });
+
+                    dots.forEach((dot, index) => {
+                        dot.addEventListener('click', () => showImage(index));
+                    });
+                }
+
                 container.appendChild(postElement);
             });
         } catch (error) {
             console.error('Error loading blog posts:', error);
-            // Fallback content with image
-            document.getElementById('blog-posts-container').innerHTML = `
-                <div class="blog-post">
-                    <img 
-                        src="./blog/images/neural-network-viz.png" 
-                        alt="Neural Network Visualization"
-                        class="blog-post-image"
-                        onerror="this.src='./blog/images/default-blog.png'"
-                    >
-                    <div class="blog-post-content">
-                        <div>
-                            <div class="blog-date">2024-01-15</div>
-                            <h3>Understanding Neural Network Weights Through Visualization</h3>
-                            <p>Struggling with understanding how weights work in neural networks? I've created a Streamlit app that visualizes neural network weights as layers of valves, helping you understand how weight adjustments affect the network's output.</p>
-                        </div>
-                        <a href="https://lnkd.in/gBG9dyS2" target="_blank">Try the Demo →</a>
-                    </div>
-                </div>
-            `;
+            // Fallback content...
         }
     }
 
