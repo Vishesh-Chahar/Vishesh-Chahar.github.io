@@ -393,10 +393,10 @@
                     const imagesHTML = metadata.images.map((image, index) => `
                         <div class="blog-image-container ${index === 0 ? 'active' : ''}">
                             <img 
-                                src="${image.src}" 
+                                src="blog/posts/${image.src}" 
                                 alt="${image.alt}"
                                 class="blog-post-image"
-                                onerror="this.src='./blog/images/default-blog.png'"
+                                onerror="this.src='blog/images/default-blog.png'"
                             >
                             <p class="image-caption">${image.caption}</p>
                         </div>
