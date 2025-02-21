@@ -406,8 +406,8 @@
                         <div class="blog-images-carousel">
                             ${imagesHTML}
                             ${metadata.images.length > 1 ? `
-                                <button class="carousel-prev">←</button>
-                                <button class="carousel-next">→</button>
+                                <button class="carousel-prev" type="button">←</button>
+                                <button class="carousel-next" type="button">→</button>
                                 <div class="carousel-dots">
                                     ${metadata.images.map((_, i) => `
                                         <span class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>
@@ -421,7 +421,7 @@
                                 <h3>${post.title}</h3>
                                 <p>${post.excerpt}</p>
                             </div>
-                            <a href="${post.url}" target="_blank">
+                            <a href="${post.url}" target="_blank" class="blog-link">
                                 ${post.url.includes('http') ? 'Try the Demo →' : 'Read More →'}
                             </a>
                         </div>
@@ -442,18 +442,26 @@
                             currentIndex = index;
                         }
 
-                        carousel.querySelector('.carousel-prev').addEventListener('click', () => {
+                        const prevButton = carousel.querySelector('.carousel-prev');
+                        const nextButton = carousel.querySelector('.carousel-next');
+
+                        prevButton.addEventListener('click', (e) => {
+                            e.stopPropagation();
                             const newIndex = (currentIndex - 1 + images.length) % images.length;
                             showImage(newIndex);
                         });
 
-                        carousel.querySelector('.carousel-next').addEventListener('click', () => {
+                        nextButton.addEventListener('click', (e) => {
+                            e.stopPropagation();
                             const newIndex = (currentIndex + 1) % images.length;
                             showImage(newIndex);
                         });
 
                         dots.forEach((dot, index) => {
-                            dot.addEventListener('click', () => showImage(index));
+                            dot.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                showImage(index);
+                            });
                         });
                     }
 
