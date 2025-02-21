@@ -6,9 +6,7 @@ Struggling with understanding how weights work in neural networks? I've created 
 
 ## The Challenge
 
-Many developers understand the theory behind neural networks but struggle to visualize how they actually work...
-
-[Rest of your blog post content]
+Many developers understand the theory behind neural networks but struggle to visualize how they actually work. This interactive visualization tool helps bridge that gap.
 
 ## Try It Yourself
 

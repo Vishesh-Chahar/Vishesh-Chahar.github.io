@@ -378,91 +378,97 @@
   <script>
     async function loadBlogPosts() {
         try {
-            const response = await fetch('./blog/posts/index.json');
+            const response = await fetch('./blog/index.json');
             const data = await response.json();
             const container = document.getElementById('blog-posts-container');
 
-            data.posts.forEach(post => {
-                const postElement = document.createElement('div');
-                postElement.className = 'blog-post';
-                
-                // Create image carousel/gallery
-                const imagesHTML = post.images.map((image, index) => `
-                    <div class="blog-image-container ${index === 0 ? 'active' : ''}">
-                        <img 
-                            src="${image.src}" 
-                            alt="${image.alt}"
-                            class="blog-post-image"
-                            onerror="this.src='./blog/images/default-blog.png'"
-                        >
-                        <p class="image-caption">${image.caption}</p>
-                    </div>
-                `).join('');
+            for (const post of data.posts) {
+                try {
+                    // Load metadata for each post
+                    const metadataResponse = await fetch(`${post.folder}/metadata.json`);
+                    const metadata = await metadataResponse.json();
 
-                postElement.innerHTML = `
-                    <div class="blog-images-carousel">
-                        ${imagesHTML}
-                        ${post.images.length > 1 ? `
-                            <button class="carousel-prev">←</button>
-                            <button class="carousel-next">→</button>
-                            <div class="carousel-dots">
-                                ${post.images.map((_, i) => `
-                                    <span class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>
-                                `).join('')}
-                            </div>
-                        ` : ''}
-                    </div>
-                    <div class="blog-post-content">
-                        <div>
-                            <div class="blog-date">${post.date}</div>
-                            <h3>${post.title}</h3>
-                            <p>${post.excerpt}</p>
+                    const postElement = document.createElement('div');
+                    postElement.className = 'blog-post';
+                    
+                    // Create image carousel/gallery
+                    const imagesHTML = metadata.images.map((image, index) => `
+                        <div class="blog-image-container ${index === 0 ? 'active' : ''}">
+                            <img 
+                                src="${post.folder}/${image.src}" 
+                                alt="${image.alt}"
+                                class="blog-post-image"
+                                onerror="this.src='./blog/images/default-blog.png'"
+                            >
+                            <p class="image-caption">${image.caption}</p>
                         </div>
-                        <a href="${post.url}" target="_blank">
-                            ${post.url.includes('http') ? 'Try the Demo →' : 'Read More →'}
-                        </a>
-                    </div>
-                `;
+                    `).join('');
 
-                // Add carousel functionality if there are multiple images
-                if (post.images.length > 1) {
-                    const carousel = postElement.querySelector('.blog-images-carousel');
-                    const images = carousel.querySelectorAll('.blog-image-container');
-                    const dots = carousel.querySelectorAll('.dot');
-                    let currentIndex = 0;
+                    postElement.innerHTML = `
+                        <div class="blog-images-carousel">
+                            ${imagesHTML}
+                            ${metadata.images.length > 1 ? `
+                                <button class="carousel-prev">←</button>
+                                <button class="carousel-next">→</button>
+                                <div class="carousel-dots">
+                                    ${metadata.images.map((_, i) => `
+                                        <span class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="blog-post-content">
+                            <div>
+                                <div class="blog-date">${post.date}</div>
+                                <h3>${post.title}</h3>
+                                <p>${post.excerpt}</p>
+                            </div>
+                            <a href="${post.url}" target="_blank">
+                                ${post.url.includes('http') ? 'Try the Demo →' : 'Read More →'}
+                            </a>
+                        </div>
+                    `;
 
-                    function showImage(index) {
-                        images.forEach(img => img.classList.remove('active'));
-                        dots.forEach(dot => dot.classList.remove('active'));
-                        images[index].classList.add('active');
-                        dots[index].classList.add('active');
-                        currentIndex = index;
+                    // Add carousel functionality if there are multiple images
+                    if (metadata.images.length > 1) {
+                        const carousel = postElement.querySelector('.blog-images-carousel');
+                        const images = carousel.querySelectorAll('.blog-image-container');
+                        const dots = carousel.querySelectorAll('.dot');
+                        let currentIndex = 0;
+
+                        function showImage(index) {
+                            images.forEach(img => img.classList.remove('active'));
+                            dots.forEach(dot => dot.classList.remove('active'));
+                            images[index].classList.add('active');
+                            dots[index].classList.add('active');
+                            currentIndex = index;
+                        }
+
+                        carousel.querySelector('.carousel-prev').addEventListener('click', () => {
+                            const newIndex = (currentIndex - 1 + images.length) % images.length;
+                            showImage(newIndex);
+                        });
+
+                        carousel.querySelector('.carousel-next').addEventListener('click', () => {
+                            const newIndex = (currentIndex + 1) % images.length;
+                            showImage(newIndex);
+                        });
+
+                        dots.forEach((dot, index) => {
+                            dot.addEventListener('click', () => showImage(index));
+                        });
                     }
 
-                    carousel.querySelector('.carousel-prev').addEventListener('click', () => {
-                        const newIndex = (currentIndex - 1 + images.length) % images.length;
-                        showImage(newIndex);
-                    });
-
-                    carousel.querySelector('.carousel-next').addEventListener('click', () => {
-                        const newIndex = (currentIndex + 1) % images.length;
-                        showImage(newIndex);
-                    });
-
-                    dots.forEach((dot, index) => {
-                        dot.addEventListener('click', () => showImage(index));
-                    });
+                    container.appendChild(postElement);
+                } catch (error) {
+                    console.error(`Error loading post ${post.id}:`, error);
                 }
-
-                container.appendChild(postElement);
-            });
+            }
         } catch (error) {
-            console.error('Error loading blog posts:', error);
-            // Fallback content...
+            console.error('Error loading blog index:', error);
         }
     }
 
-    // Load blog posts when the page loads
     document.addEventListener('DOMContentLoaded', loadBlogPosts);
   </script>
 </body>

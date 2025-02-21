@@ -1,0 +1,19 @@
+{
+    "images": [
+        {
+            "src": "./images/img1.jpg",
+            "alt": "Neural Network Visualization Demo",
+            "caption": "Interactive visualization of neural network weights"
+        },
+        {
+            "src": "./images/img2.jpg",
+            "alt": "Network Architecture",
+            "caption": "The architecture diagram of the neural network"
+        },
+        {
+            "src": "./images/img3.jpg",
+            "alt": "Results Visualization",
+            "caption": "Visualization of weight adjustments"
+        }
+    ]
+} 
