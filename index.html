@@ -391,18 +391,22 @@
                     const postElement = document.createElement('div');
                     postElement.className = 'blog-post';
                     
-                    // Create image carousel/gallery
-                    const imagesHTML = metadata.images.map((image, index) => `
-                        <div class="blog-image-container ${index === 0 ? 'active' : ''}">
-                            <img 
-                                src="${post.folder}/${image.src}" 
-                                alt="${image.alt}"
-                                class="blog-post-image"
-                                onerror="this.src='./blog/images/default-blog.png'"
-                            >
-                            <p class="image-caption">${image.caption}</p>
-                        </div>
-                    `).join('');
+                    // Create image carousel/gallery with corrected image paths
+                    const imagesHTML = metadata.images.map((image, index) => {
+                        // Remove the leading dot from the image src if it exists
+                        const imagePath = `${post.folder}/${image.src.replace(/^\.\//, '')}`;
+                        return `
+                            <div class="blog-image-container ${index === 0 ? 'active' : ''}">
+                                <img 
+                                    src="${imagePath}" 
+                                    alt="${image.alt}"
+                                    class="blog-post-image"
+                                    onerror="this.src='./blog/images/default-blog.png'"
+                                >
+                                <p class="image-caption">${image.caption}</p>
+                            </div>
+                        `;
+                    }).join('');
 
                     postElement.innerHTML = `
                         <div class="blog-images-carousel">

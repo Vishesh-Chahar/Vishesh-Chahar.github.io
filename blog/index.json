@@ -1,20 +1,20 @@
 {
     "posts": [
         {
+            "id": "writing-prompt-tool",
+            "title": "5 AM Thoughts: Building a Writing Prompt Generator",
+            "date": "2024-02-14",
+            "excerpt": "Yet again, it's 5 am, and I'm wondering what I should do... I've made a tool using microsoft phi-4-128k-instruct for generating writing prompts when writer's block hits. Built with tkinter for desktop integration and soon moving to Groq for better performance.",
+            "url": "https://www.linkedin.com/posts/visheshchahar_yet-again-its-5-am-and-im-wondering-what-activity-7295586261124136960-NbUh",
+            "folder": "./blog/posts/writing-prompt-tool"
+        },
+        {
             "id": "neural-network-visualization",
             "title": "Understanding Neural Network Weights Through Visualization",
             "date": "2024-01-15",
             "excerpt": "Struggling with understanding how weights work in neural networks? I've created a Streamlit app that visualizes neural network weights as layers of valves, helping you understand how weight adjustments affect the network's output.",
             "url": "https://lnkd.in/gBG9dyS2",
             "folder": "./blog/posts/neural-network-visualization"
-        },
-        {
-            "id": "llm-training-pipelines",
-            "title": "Optimizing LLM Training Pipelines",
-            "date": "2024-01-10",
-            "excerpt": "Insights into building efficient training pipelines for large language models and optimizing their performance for production environments.",
-            "url": "https://github.com/Vishesh-Chahar",
-            "folder": "./blog/posts/llm-training-pipelines"
         }
     ]
 } 

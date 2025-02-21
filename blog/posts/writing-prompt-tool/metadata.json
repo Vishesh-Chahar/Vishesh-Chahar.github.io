@@ -1,1 +1,19 @@
- 
+{
+    "images": [
+        {
+            "src": "images/img1.jpg",
+            "alt": "Writing Prompt Tool Interface",
+            "caption": "Desktop widget interface for the writing prompt generator"
+        },
+        {
+            "src": "images/img2.jpg",
+            "alt": "Tool Architecture",
+            "caption": "Architecture showing Phi-4 model integration with tkinter"
+        },
+        {
+            "src": "images/img3.jpg",
+            "alt": "Tool Demo",
+            "caption": "Demonstration of the writing prompt generator in action"
+        }
+    ]
+} 

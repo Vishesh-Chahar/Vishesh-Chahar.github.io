@@ -1,0 +1,14 @@
+{
+    "images": [
+        {
+            "src": "images/img1.jpg",
+            "alt": "LLM Pipeline Overview",
+            "caption": "High-level overview of the training pipeline"
+        },
+        {
+            "src": "images/img2.jpg",
+            "alt": "Performance Metrics",
+            "caption": "Training performance metrics and optimization results"
+        }
+    ]
+} 
