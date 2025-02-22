@@ -1,0 +1,29 @@
+{
+    "images": [
+        {
+            "src": "img1.png",
+            "alt": "Hyperparameters and Training Interface",
+            "caption": "Interface showing hyperparameters and training epochs"
+        },
+        {
+            "src": "img2.png",
+            "alt": "CSV Upload Interface",
+            "caption": "Interface for uploading CSV file for training"
+        },
+        {
+            "src": "img3.png",
+            "alt": "Training Loss Visualization",
+            "caption": "Graph showing training loss over epochs"
+        },
+        {
+            "src": "img4.png",
+            "alt": "Prediction Data Upload",
+            "caption": "Interface for uploading CSV file for predictions"
+        },
+        {
+            "src": "img5.png",
+            "alt": "Prediction Visualization",
+            "caption": "Predicted values displayed with candlestick visualization graph"
+        }
+    ]
+} 
