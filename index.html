@@ -548,25 +548,22 @@
   <script>
     async function loadBlogPosts() {
         try {
-            const response = await fetch('./blog/index.json');
+            const response = await fetch('/blog/posts/index.json');
             const data = await response.json();
-            const container = document.getElementById('blog-posts-container');
+            const container = document.querySelector('#blog');
 
             for (const post of data.posts) {
                 try {
-                    const metadataResponse = await fetch(`${post.folder}/metadata.json`);
-                    const metadata = await metadataResponse.json();
-
                     const postElement = document.createElement('div');
                     postElement.className = 'blog-post';
-                    
-                    const imagesHTML = metadata.images.map((image, index) => `
-                        <div class="blog-image-container ${index === 0 ? 'active' : ''}">
+
+                    // Create images HTML
+                    const imagesHTML = post.images.map(image => `
+                        <div class="blog-image-container">
                             <img 
-                                src="${post.folder}/images/${image.src}" 
+                                src="${post.folder}/images/${image.src}"
                                 alt="${image.alt}"
-                                class="blog-post-image"
-                                onerror="this.src='blog/images/default-blog.png'"
+                                class="blog-image"
                             >
                             <p class="image-caption">${image.caption}</p>
                         </div>
@@ -575,11 +572,11 @@
                     postElement.innerHTML = `
                         <div class="blog-images-carousel">
                             ${imagesHTML}
-                            ${metadata.images.length > 1 ? `
+                            ${post.images.length > 1 ? `
                                 <button class="carousel-prev" type="button">←</button>
                                 <button class="carousel-next" type="button">→</button>
                                 <div class="carousel-dots">
-                                    ${metadata.images.map((_, i) => `
+                                    ${post.images.map((_, i) => `
                                         <span class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>
                                     `).join('')}
                                 </div>
@@ -592,57 +589,63 @@
                                 <p>${post.excerpt}</p>
                             </div>
                             <div class="blog-links">
-                                <a href="/${post.folder}/content.md" class="blog-link">
+                                <a href="/blog${post.folder}/content.md" class="blog-link">
                                     View Raw →
                                 </a>
-                                <a href="/blog/template.html?post=/${post.folder}/content.md" class="blog-link">
+                                <a href="/blog/template.html?post=/blog${post.folder}/content.md" class="blog-link">
                                     Read Post →
                                 </a>
                             </div>
                         </div>
                     `;
 
-                    // Add carousel functionality if there are multiple images
-                    if (metadata.images.length > 1) {
+                    container.appendChild(postElement);
+
+                    // Add carousel functionality
+                    if (post.images.length > 1) {
                         const carousel = postElement.querySelector('.blog-images-carousel');
                         const images = carousel.querySelectorAll('.blog-image-container');
                         const dots = carousel.querySelectorAll('.dot');
                         let currentIndex = 0;
 
-                        function showImage(index) {
-                            images.forEach(img => img.classList.remove('active'));
-                            dots.forEach(dot => dot.classList.remove('active'));
-                            images[index].classList.add('active');
-                            dots[index].classList.add('active');
-                            currentIndex = index;
+                        // Show first image
+                        images[0].style.display = 'block';
+                        for (let i = 1; i < images.length; i++) {
+                            images[i].style.display = 'none';
                         }
 
-                        const prevButton = carousel.querySelector('.carousel-prev');
-                        const nextButton = carousel.querySelector('.carousel-next');
-
-                        prevButton.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            const newIndex = (currentIndex - 1 + images.length) % images.length;
-                            showImage(newIndex);
+                        // Previous button
+                        carousel.querySelector('.carousel-prev').addEventListener('click', () => {
+                            images[currentIndex].style.display = 'none';
+                            dots[currentIndex].classList.remove('active');
+                            currentIndex = (currentIndex - 1 + images.length) % images.length;
+                            images[currentIndex].style.display = 'block';
+                            dots[currentIndex].classList.add('active');
                         });
 
-                        nextButton.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            const newIndex = (currentIndex + 1) % images.length;
-                            showImage(newIndex);
+                        // Next button
+                        carousel.querySelector('.carousel-next').addEventListener('click', () => {
+                            images[currentIndex].style.display = 'none';
+                            dots[currentIndex].classList.remove('active');
+                            currentIndex = (currentIndex + 1) % images.length;
+                            images[currentIndex].style.display = 'block';
+                            dots[currentIndex].classList.add('active');
                         });
 
+                        // Dot navigation
                         dots.forEach((dot, index) => {
-                            dot.addEventListener('click', (e) => {
-                                e.stopPropagation();
-                                showImage(index);
+                            dot.addEventListener('click', () => {
+                                images[currentIndex].style.display = 'none';
+                                dots[currentIndex].classList.remove('active');
+                                currentIndex = index;
+                                images[currentIndex].style.display = 'block';
+                                dots[currentIndex].classList.add('active');
                             });
                         });
                     }
 
-                    container.appendChild(postElement);
                 } catch (error) {
-                    console.error(`Error loading post ${post.id}:`, error);
+                    console.error(`Error loading post:`, error);
                 }
             }
         } catch (error) {
