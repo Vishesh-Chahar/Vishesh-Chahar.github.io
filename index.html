@@ -591,9 +591,14 @@
                                 <h3>${post.title}</h3>
                                 <p>${post.excerpt}</p>
                             </div>
-                            <a href="./blog/template.html?post=${post.folder}/content.md" class="blog-link">
-                                Read More →
-                            </a>
+                            <div class="blog-links">
+                                <a href="/${post.folder}/content.md" class="blog-link">
+                                    View Raw →
+                                </a>
+                                <a href="/blog/template.html?post=/${post.folder}/content.md" class="blog-link">
+                                    Read Post →
+                                </a>
+                            </div>
                         </div>
                     `;
 
