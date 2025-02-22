@@ -250,6 +250,50 @@ ul.main-menu li a {
   box-shadow: 0 0 5px #00FF41;
 }
 
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.contact-links a:hover {
+  background: rgba(0, 255, 65, 0.1);
+  transform: translateY(-2px);
+  box-shadow: var(--neon-glow);
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  transition: all 0.3s ease;
+}
+
+.contact-links a:hover .contact-icon {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .contact-links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contact-links a {
+    justify-content: center;
+  }
+}
 /* Update the background styles to work with Matrix rain */
 html {
   background-color: #000000;
