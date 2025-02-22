@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post - Vishesh Chahar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Consolas&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: #0C1F0C;
+            --accent: #00FF41;
+            --text-primary: #00FF41;
+            --text-secondary: #003B00;
+            --highlight: #008F11;
+            --card-bg: #0C1F0C;
+            --neon-glow: 0 0 10px #00FF41;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Consolas', monospace;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .blog-content {
+            background-color: rgba(12, 31, 12, 0.9);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--highlight);
+        }
+
+        h1 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .date {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .blog-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .blog-image-container {
+            position: relative;
+        }
+
+        .blog-image {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: 1px solid var(--highlight);
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Markdown content styling */
+        .blog-content h2 {
+            color: var(--accent);
+            margin: 2rem 0 1rem;
+        }
+
+        .blog-content p {
+            margin-bottom: 1rem;
+        }
+
+        .blog-content a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .blog-content a:hover {
+            text-decoration: underline;
+        }
+
+        .blog-content code {
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+        }
+
+        .blog-content pre {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-button">← Back to Home</a>
+        <div class="blog-content">
+            <div id="content"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        async function loadBlogPost() {
+            try {
+                // Get the markdown file path from the URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const postPath = urlParams.get('post');
+                
+                if (!postPath) {
+                    throw new Error('No post specified');
+                }
+
+                // Load the markdown content
+                const response = await fetch(postPath);
+                const markdown = await response.text();
+
+                // Convert markdown to HTML and insert into the page
+                document.getElementById('content').innerHTML = marked.parse(markdown);
+
+                // Load and insert images if available
+                try {
+                    const metadataResponse = await fetch(`${postPath.replace('content.md', 'metadata.json')}`);
+                    const metadata = await metadataResponse.json();
+                    
+                    if (metadata.images && metadata.images.length > 0) {
+                        const imagesContainer = document.createElement('div');
+                        imagesContainer.className = 'blog-images';
+                        
+                        metadata.images.forEach(image => {
+                            const imageContainer = document.createElement('div');
+                            imageContainer.className = 'blog-image-container';
+                            
+                            imageContainer.innerHTML = `
+                                <img 
+                                    src="${postPath.replace('content.md', '')}images/${image.src}"
+                                    alt="${image.alt}"
+                                    class="blog-image"
+                                >
+                                <p class="image-caption">${image.caption}</p>
+                            `;
+                            
+                            imagesContainer.appendChild(imageContainer);
+                        });
+
+                        // Insert images after the first paragraph
+                        const firstParagraph = document.querySelector('.blog-content p');
+                        if (firstParagraph) {
+                            firstParagraph.parentNode.insertBefore(imagesContainer, firstParagraph.nextSibling);
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error loading images:', error);
+                }
+
+            } catch (error) {
+                console.error('Error loading blog post:', error);
+                document.getElementById('content').innerHTML = '<p>Error loading blog post</p>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadBlogPost);
+    </script>
+</body>
+</html> 
