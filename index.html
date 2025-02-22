@@ -287,12 +287,94 @@
         height: 100%;
         z-index: -1;
     }
+
+    .menu-toggle {
+        display: none;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 5px;
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        z-index: 1001;
+    }
+
+    .menu-toggle span {
+        display: block;
+        width: 25px;
+        height: 2px;
+        margin: 5px 0;
+        background-color: var(--text-primary);
+        transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+        .menu-toggle {
+            display: block;
+        }
+
+        nav ul {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 1rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul.active {
+            display: flex;
+        }
+
+        nav ul li {
+            text-align: center;
+            padding: 0.5rem 0;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Update mobile styles for Matrix theme */
+        nav ul {
+            background-color: rgba(12, 31, 12, 0.95);
+            border-bottom: 1px solid var(--accent);
+            box-shadow: 0 4px 20px rgba(0, 255, 65, 0.1);
+        }
+
+        nav ul li a {
+            color: var(--text-primary);
+            text-shadow: 0 0 5px var(--accent);
+        }
+
+        .menu-toggle span {
+            background-color: var(--accent);
+            box-shadow: 0 0 5px var(--accent);
+        }
+    }
   </style>
 </head>
 
 <body>
   <canvas id="matrix-rain"></canvas>
   <nav>
+    <button class="menu-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
@@ -555,6 +637,32 @@
     }
 
     draw();
+
+    // Menu toggle functionality
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.main-menu');
+
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menuToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.main-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('nav')) {
+            menuToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+        }
+    });
   </script>
 </body>
 
