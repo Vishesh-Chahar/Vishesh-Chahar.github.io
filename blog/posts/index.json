@@ -5,41 +5,75 @@
             "slug": "neural-network-visualization",
             "date": "2024-01-15",
             "excerpt": "Struggling with understanding how weights work in neural networks? I've created a Streamlit app that visualizes neural network weights as layers of valves, helping you understand how weight adjustments affect the network's output.",
-            "url": "https://lnkd.in/gBG9dyS2",
+            "folder": "./neural-network-visualization",
             "images": [
                 {
-                    "src": "./blog/images/nn-viz-main.jpg",
+                    "src": "img1.png",
                     "alt": "Neural Network Visualization Demo",
                     "caption": "Interactive visualization of neural network weights"
                 },
                 {
-                    "src": "./blog/images/nn-viz-architecture.jpg",
+                    "src": "img2.png",
                     "alt": "Network Architecture",
                     "caption": "The architecture diagram of the neural network"
-                },
-                {
-                    "src": "./blog/images/nn-viz-results.jpg",
-                    "alt": "Results Visualization",
-                    "caption": "Visualization of weight adjustments"
                 }
             ]
         },
         {
-            "title": "Optimizing LLM Training Pipelines",
-            "slug": "llm-training-pipelines",
-            "date": "2024-01-10",
-            "excerpt": "Insights into building efficient training pipelines for large language models and optimizing their performance for production environments.",
-            "url": "https://github.com/Vishesh-Chahar",
+            "title": "5 AM Thoughts: Building a Writing Prompt Generator",
+            "slug": "writing-prompt-tool",
+            "date": "2024-02-14",
+            "excerpt": "Yet again, it's 5 am, and I'm working on another tool - this time a writing prompt generator using Microsoft's phi-4-128k-instruct model to help overcome writer's block.",
+            "folder": "./writing-prompt-tool",
             "images": [
                 {
-                    "src": "./blog/images/llm-pipeline-overview.jpg",
-                    "alt": "LLM Pipeline Overview",
-                    "caption": "High-level overview of the training pipeline"
+                    "src": "img1.png",
+                    "alt": "Writing Prompt Tool Interface",
+                    "caption": "Desktop widget interface for the writing prompt generator"
                 },
                 {
-                    "src": "./blog/images/llm-performance.jpg",
-                    "alt": "Performance Metrics",
-                    "caption": "Training performance metrics and optimization results"
+                    "src": "img2.png",
+                    "alt": "Tool Architecture",
+                    "caption": "Architecture showing Phi-4 model integration with tkinter"
+                },
+                {
+                    "src": "img3.png",
+                    "alt": "Tool Demo",
+                    "caption": "Demonstration of the writing prompt generator in action"
+                }
+            ]
+        },
+        {
+            "title": "Making Sense of LSTM Hyperparameters Through Interactive Visualization",
+            "slug": "hyperparameter-visualization",
+            "date": "2024-03-21",
+            "excerpt": "When I started my machine learning journey, hyperparameters felt like abstract, intangible concepts. I've created an interactive LSTM model that helps visualize how different hyperparameter values affect model training.",
+            "folder": "./hyperparameter-visualization",
+            "images": [
+                {
+                    "src": "img1.png",
+                    "alt": "Hyperparameters and Training Interface",
+                    "caption": "Interface showing hyperparameters and training epochs"
+                },
+                {
+                    "src": "img2.png",
+                    "alt": "CSV Upload Interface",
+                    "caption": "Interface for uploading CSV file for training"
+                },
+                {
+                    "src": "img3.png",
+                    "alt": "Training Loss Visualization",
+                    "caption": "Graph showing training loss over epochs"
+                },
+                {
+                    "src": "img4.png",
+                    "alt": "Prediction Data Upload",
+                    "caption": "Interface for uploading CSV file for predictions"
+                },
+                {
+                    "src": "img5.png",
+                    "alt": "Prediction Visualization",
+                    "caption": "Predicted values displayed with candlestick visualization graph"
                 }
             ]
         }
