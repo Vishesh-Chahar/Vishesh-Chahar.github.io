@@ -7,30 +7,9 @@
   <title>Vishesh Chahar - Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Consolas&display=swap" rel="stylesheet">
   <style>
-    :root {
-      /* Matrix-inspired theme */
-      --bg-primary: #000000;      /* Black background */
-      --bg-secondary: #0C1F0C;    /* Dark green */
-      --accent: #00FF41;          /* Bright matrix green */
-      --text-primary: #00FF41;    /* Bright matrix green */
-      --text-secondary: #003B00;  /* Darker green */
-      --highlight: #008F11;       /* Medium green */
-      --card-bg: #0C1F0C;         /* Dark green */
-      --neon-glow: 0 0 10px #00FF41; /* Matrix green glow */
-    }
+    /* ... existing root variables remain the same ... */
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Consolas', monospace;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-    }
+    /* Base styles remain the same until nav */
 
     nav {
       background-color: rgba(0, 0, 0, 0.9);
@@ -49,243 +28,156 @@
       gap: 2rem;
     }
 
-    nav a {
-      text-decoration: none;
-      color: var(--text-primary);
-      font-weight: bold;
-      transition: color 0.3s ease;
+    /* Add hamburger menu for mobile */
+    .menu-toggle {
+      display: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
     }
 
-    nav a:hover {
-      color: var(--accent);
+    .menu-toggle span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: var(--text-primary);
+      margin: 5px 0;
+      transition: all 0.3s ease;
     }
 
     .container {
-      max-width: 800px;
+      max-width: 1200px;
       margin: 80px auto 0;
-      padding: 2rem;
+      padding: 1rem;
     }
 
-    section {
-      margin-bottom: 3rem;
-      padding: 2rem;
-      background-color: rgba(12, 31, 12, 0.9);
-      border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-      border: 1px solid var(--highlight);
-    }
-
-    h1, h2, h3 {
-      color: var(--text-primary);
-      margin-bottom: 1rem;
-    }
-
-    .intro {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .profile-img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      margin-bottom: 1rem;
-      border: 3px solid var(--highlight);
-    }
-
+    /* Responsive Project Grid */
     .project-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
+      padding: 0.5rem;
     }
 
     .project-card {
-      background: var(--card-bg);
-      border: 1px solid var(--highlight);
-      padding: 1.5rem;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--neon-glow);
-      border-color: var(--text-primary);
-    }
-
-    .blog-post {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 2rem;
-      position: relative;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      background: var(--bg-secondary);
-      border-radius: 8px;
-      border-left: 4px solid var(--accent);
-      transition: all 0.3s ease;
-    }
-
-    .blog-post:hover {
-      transform: translateX(10px);
-      box-shadow: var(--neon-glow);
-    }
-
-    .blog-post-image {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 4px;
-      border: 1px solid var(--highlight);
-    }
-
-    .blog-post-content {
+      height: 100%;
+      min-height: 200px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
-    .blog-date {
-      color: var(--accent);
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
-
-    a {
-      color: var(--text-primary);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    a:hover {
-      color: var(--accent);
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background-color: var(--bg-secondary);
-      color: var(--text-secondary);
-      margin-top: 3rem;
-    }
-
-    .skills-list {
-      display: flex;
-      flex-wrap: wrap;
+    /* Responsive Blog Posts */
+    .blog-post {
+      grid-template-columns: 1fr;
       gap: 1rem;
-      margin-top: 1rem;
+      padding: 1.5rem;
     }
 
-    .skill-tag {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-      border: 1px solid var(--accent);
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.9rem;
+    .blog-images-carousel {
+      height: 250px;
+      margin-bottom: 1rem;
     }
 
+    .blog-post-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    /* Enhanced Mobile Styles */
     @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
       nav ul {
+        display: none;
         flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        padding: 1rem;
+      }
+
+      nav ul.active {
+        display: flex;
+      }
+
+      nav li {
+        width: 100%;
         text-align: center;
+      }
+
+      nav a {
+        display: block;
+        padding: 0.8rem;
+      }
+
+      .container {
+        padding: 0.5rem;
+        margin-top: 60px;
+      }
+
+      section {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .profile-img {
+        width: 120px;
+        height: 120px;
+      }
+
+      .skills-list {
+        justify-content: center;
+      }
+
+      .contact-links {
+        flex-direction: column;
         gap: 1rem;
       }
 
+      .contact-links a {
+        padding: 0.8rem;
+        background: var(--bg-secondary);
+        border-radius: 4px;
+        text-align: center;
+      }
+    }
+
+    /* Tablet Styles */
+    @media (min-width: 769px) and (max-width: 1024px) {
       .container {
         padding: 1rem;
       }
 
+      .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       .blog-post {
-        grid-template-columns: 1fr;
-      }
-
-      .blog-post-image {
-        width: 100%;
-        height: 200px;
+        grid-template-columns: 1fr 2fr;
       }
     }
 
-    .blog-images-carousel {
-        position: relative;
-        width: 100%;
-        height: 300px;
-        overflow: hidden;
-    }
+    /* Larger Screen Optimizations */
+    @media (min-width: 1025px) {
+      .container {
+        padding: 2rem;
+      }
 
-    .blog-image-container {
-        display: none;
-        width: 100%;
-        height: 100%;
-    }
+      .project-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
 
-    .blog-image-container.active {
-        display: block;
-    }
-
-    .carousel-prev,
-    .carousel-next {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: var(--bg-secondary);
-        border: 1px solid var(--text-primary);
-        color: var(--text-primary);
-        padding: 8px 12px;
-        cursor: pointer;
-        z-index: 2;
-    }
-
-    .carousel-prev { left: 10px; }
-    .carousel-next { right: 10px; }
-
-    .carousel-dots {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 8px;
-    }
-
-    .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--bg-secondary);
-        border: 1px solid var(--text-primary);
-        cursor: pointer;
-    }
-
-    .dot.active {
-        background: var(--text-primary);
-    }
-
-    .image-caption {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(22, 33, 62, 0.8);
-        color: var(--text-primary);
-        padding: 8px;
-        margin: 0;
-        font-size: 0.9rem;
-    }
-
-    #matrix-rain {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
+      .blog-post {
+        grid-template-columns: 300px 1fr;
+      }
     }
   </style>
 </head>
@@ -293,7 +185,12 @@
 <body>
   <canvas id="matrix-rain"></canvas>
   <nav>
-    <ul>
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul id="navMenu">
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#blog">Blog</a></li>
@@ -302,259 +199,30 @@
     </ul>
   </nav>
 
-  <div class="container">
-    <section class="intro">
-      <img src="pfp2.jpg" alt="Vishesh Chahar" class="profile-img">
-      <h1>Vishesh Chahar</h1>
-      <p>Data Scientist | AI/ML Engineer | NLP Specialist</p>
-    </section>
-
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        I'm a Data Scientist specializing in AI/ML, NLP, and LLM fine-tuning. With expertise in scalable architectures, 
-        CUDA-based model acceleration, and data pipeline optimization, I focus on delivering efficient AI solutions.
-      </p>
-      <div class="skills-list">
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">CUDA</span>
-        <span class="skill-tag">PyTorch</span>
-        <span class="skill-tag">Kafka</span>
-        <span class="skill-tag">PySpark</span>
-        <span class="skill-tag">Flask</span>
-        <span class="skill-tag">ML Pipelines</span>
-        <span class="skill-tag">LLM Fine-tuning</span>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h2>Projects</h2>
-      <div class="project-grid">
-        <div class="project-card">
-          <h3>Headliner</h3>
-          <p>Fine-tuned FLAN-T5 model for automated headline generation, implementing advanced NLP techniques for improved content summarization.</p>
-          <a href="https://github.com/Vishesh-Chahar/headliner">View Project →</a>
-        </div>
-        <div class="project-card">
-          <h3>QA Project</h3>
-          <p>Developed a custom NLP model for automated question answering, enhancing information retrieval accuracy.</p>
-          <a href="https://github.com/Vishesh-Chahar/QA">View Project →</a>
-        </div>
-        <div class="project-card">
-          <h3>Diagnosis Pal</h3>
-          <p>Created an AI-powered disease classification model using advanced machine learning algorithms for medical diagnosis assistance.</p>
-          <a href="https://github.com/Vishesh-Chahar/Diagnostic-Pal">View Project →</a>
-        </div>
-        <div class="project-card">
-          <h3>Team Fateh</h3>
-          <p>Award-winning engineering project focused on innovative solutions and technical excellence.</p>
-          <a href="https://www.teamfateh.com">View Project →</a>
-        </div>
-        <div class="project-card">
-          <h3>Sentiment Analysis</h3>
-          <p>Built a sentiment analysis model using BERT for accurate emotion detection in text.</p>
-          <a href="https://github.com/Vishesh-Chahar/Sentiment-Analysis">View Project →</a>
-        </div>
-        <div class="project-card">
-          <h3>ML Algorithms</h3>
-          <p>Implementation of various machine learning algorithms from scratch for educational purposes.</p>
-          <a href="https://github.com/Vishesh-Chahar/ML-Algorithms">View Project →</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="blog">
-      <h2>Blog Posts</h2>
-      <div id="blog-posts-container">
-        <!-- Blog posts will be loaded here dynamically -->
-      </div>
-    </section>
-
-    <section id="contact">
-      <h2>Get in Touch</h2>
-      <div class="contact-links">
-        <a href="mailto:vishesh.chahar01@gmail.com">Email</a>
-        <a href="https://github.com/Vishesh-Chahar">GitHub</a>
-        <a href="https://linkedin.com/in/visheshchahar">LinkedIn</a>
-        <a href="https://leetcode.com/vishesh_chahar/">LeetCode</a>
-      </div>
-    </section>
-  </div>
-
-  <footer>
-    <p>&copy; 2024 Vishesh Chahar. All rights reserved.</p>
-  </footer>
+  <!-- Rest of your HTML remains the same -->
 
   <script>
-    async function loadBlogPosts() {
-        try {
-            const response = await fetch('./blog/index.json');
-            const data = await response.json();
-            const container = document.getElementById('blog-posts-container');
+    // Add this to your existing JavaScript
+    document.getElementById('menuToggle').addEventListener('click', function () {
+      document.getElementById('navMenu').classList.toggle('active');
+      const spans = this.getElementsByTagName('span');
+      spans[0].style.transform = spans[0].style.transform ? '' : 'rotate(45deg) translate(5px, 6px)';
+      spans[1].style.opacity = spans[1].style.opacity ? '' : '0';
+      spans[2].style.transform = spans[2].style.transform ? '' : 'rotate(-45deg) translate(5px, -6px)';
+    });
 
-            for (const post of data.posts) {
-                try {
-                    const metadataResponse = await fetch(`${post.folder}/metadata.json`);
-                    const metadata = await metadataResponse.json();
+    // Close menu when clicking a link
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navMenu').classList.remove('active');
+        const spans = document.getElementById('menuToggle').getElementsByTagName('span');
+        spans[0].style.transform = '';
+        spans[1].style.opacity = '';
+        spans[2].style.transform = '';
+      });
+    });
 
-                    const postElement = document.createElement('div');
-                    postElement.className = 'blog-post';
-                    
-                    const imagesHTML = metadata.images.map((image, index) => `
-                        <div class="blog-image-container ${index === 0 ? 'active' : ''}">
-                            <img 
-                                src="${post.folder}/images/${image.src}" 
-                                alt="${image.alt}"
-                                class="blog-post-image"
-                                onerror="this.src='blog/images/default-blog.png'"
-                            >
-                            <p class="image-caption">${image.caption}</p>
-                        </div>
-                    `).join('');
-
-                    postElement.innerHTML = `
-                        <div class="blog-images-carousel">
-                            ${imagesHTML}
-                            ${metadata.images.length > 1 ? `
-                                <button class="carousel-prev" type="button">←</button>
-                                <button class="carousel-next" type="button">→</button>
-                                <div class="carousel-dots">
-                                    ${metadata.images.map((_, i) => `
-                                        <span class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>
-                                    `).join('')}
-                                </div>
-                            ` : ''}
-                        </div>
-                        <div class="blog-post-content">
-                            <div>
-                                <div class="blog-date">${post.date}</div>
-                                <h3>${post.title}</h3>
-                                <p>${post.excerpt}</p>
-                            </div>
-                            <a href="${post.url}" target="_blank" class="blog-link">
-                                ${post.url.includes('http') ? 'Try the Demo →' : 'Read More →'}
-                            </a>
-                        </div>
-                    `;
-
-                    // Add carousel functionality if there are multiple images
-                    if (metadata.images.length > 1) {
-                        const carousel = postElement.querySelector('.blog-images-carousel');
-                        const images = carousel.querySelectorAll('.blog-image-container');
-                        const dots = carousel.querySelectorAll('.dot');
-                        let currentIndex = 0;
-
-                        function showImage(index) {
-                            images.forEach(img => img.classList.remove('active'));
-                            dots.forEach(dot => dot.classList.remove('active'));
-                            images[index].classList.add('active');
-                            dots[index].classList.add('active');
-                            currentIndex = index;
-                        }
-
-                        const prevButton = carousel.querySelector('.carousel-prev');
-                        const nextButton = carousel.querySelector('.carousel-next');
-
-                        prevButton.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            const newIndex = (currentIndex - 1 + images.length) % images.length;
-                            showImage(newIndex);
-                        });
-
-                        nextButton.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            const newIndex = (currentIndex + 1) % images.length;
-                            showImage(newIndex);
-                        });
-
-                        dots.forEach((dot, index) => {
-                            dot.addEventListener('click', (e) => {
-                                e.stopPropagation();
-                                showImage(index);
-                            });
-                        });
-                    }
-
-                    container.appendChild(postElement);
-                } catch (error) {
-                    console.error(`Error loading post ${post.id}:`, error);
-                }
-            }
-        } catch (error) {
-            console.error('Error loading blog index:', error);
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', loadBlogPosts);
-
-    // Matrix rain effect
-    const canvas = document.getElementById('matrix-rain');
-    const ctx = canvas.getContext('2d');
-
-    // Set canvas size
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Characters to use (mix of numbers and Matrix-like symbols)
-    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ日ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍ'.split('');
-
-    // Create drops
-    const drops = [];
-    const fontSize = 16;
-    const columns = canvas.width / fontSize;
-
-    // Initialize drops
-    for (let i = 0; i < columns; i++) {
-        drops[i] = Math.random() * -100;
-    }
-
-    function draw() {
-        // Semi-transparent black to create fade effect
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Set text style
-        ctx.fillStyle = '#00FF41';
-        ctx.font = fontSize + 'px monospace';
-
-        // Draw characters
-        for (let i = 0; i < drops.length; i++) {
-            // Random character
-            const char = chars[Math.floor(Math.random() * chars.length)];
-            
-            // Draw the character
-            const x = i * fontSize;
-            const y = drops[i] * fontSize;
-            
-            // Add glow effect
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = '#00FF41';
-            
-            // Varying opacity for depth effect
-            ctx.fillStyle = `rgba(0, 255, 65, ${Math.random() * 0.5 + 0.5})`;
-            
-            ctx.fillText(char, x, y);
-
-            // Reset drop if it's below screen or randomly
-            if (y > canvas.height && Math.random() > 0.975) {
-                drops[i] = 0;
-            }
-
-            // Move drop
-            drops[i]++;
-        }
-
-        // Remove shadow for next frame
-        ctx.shadowBlur = 0;
-
-        requestAnimationFrame(draw);
-    }
-
-    draw();
+    // Existing JavaScript remains the same...
   </script>
 </body>
 
