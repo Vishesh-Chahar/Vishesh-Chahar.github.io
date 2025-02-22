@@ -167,7 +167,7 @@
 
                 // Load and insert images if available
                 try {
-                    const metadataResponse = await fetch(`${postPath.replace('content.md', 'metadata.json')}`);
+                    const metadataResponse = await fetch(postPath.replace('content.md', 'metadata.json'));
                     const metadata = await metadataResponse.json();
                     
                     if (metadata.images && metadata.images.length > 0) {
@@ -178,9 +178,11 @@
                             const imageContainer = document.createElement('div');
                             imageContainer.className = 'blog-image-container';
                             
+                            const imagePath = postPath.replace('content.md', `images/${image.src}`);
+                            
                             imageContainer.innerHTML = `
                                 <img 
-                                    src="${postPath.replace('content.md', 'images')}/${image.src}"
+                                    src="${imagePath}"
                                     alt="${image.alt}"
                                     class="blog-image"
                                 >

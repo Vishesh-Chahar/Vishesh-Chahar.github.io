@@ -561,7 +561,7 @@
                     const imagesHTML = post.images.map(image => `
                         <div class="blog-image-container">
                             <img 
-                                src="${post.folder}/images/${image.src}"
+                                src="/blog/posts/${post.folder}/images/${image.src}"
                                 alt="${image.alt}"
                                 class="blog-image"
                             >
@@ -589,10 +589,10 @@
                                 <p>${post.excerpt}</p>
                             </div>
                             <div class="blog-links">
-                                <a href="/blog${post.folder}/content.md" class="blog-link">
+                                <a href="/blog/posts/${post.folder}/content.md" class="blog-link">
                                     View Raw →
                                 </a>
-                                <a href="/blog/template.html?post=/blog${post.folder}/content.md" class="blog-link">
+                                <a href="/blog/template.html?post=/blog/posts/${post.folder}/content.md" class="blog-link">
                                     Read Post →
                                 </a>
                             </div>
