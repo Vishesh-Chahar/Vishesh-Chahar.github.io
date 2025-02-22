@@ -401,6 +401,36 @@
             box-shadow: 0 0 5px var(--accent);
         }
     }
+
+    #blog {
+        max-height: 800px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent) var(--bg-secondary);
+    }
+
+    #blog::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    #blog::-webkit-scrollbar-track {
+        background: var(--bg-secondary);
+        border-radius: 4px;
+    }
+
+    #blog::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 4px;
+    }
+
+    #blog::-webkit-scrollbar-thumb:hover {
+        background: var(--highlight);
+    }
+
+    /* Update blog post styles to work better with scroll */
+    .blog-post {
+        margin-right: 10px;  /* Add space for scrollbar */
+    }
   </style>
 </head>
 
